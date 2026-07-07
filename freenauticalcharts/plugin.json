@@ -1,27 +1,7 @@
 {
-  "version": "20260117",
-  "description": "a plugin for freenauticalcharts",
-  "layouts": [
-    {
-      "name": "default",
-      "file": "layout-default.json"
-    }
-  ],
+  "version": "20260707",
+  "description": "a plugin for freenauticalcharts - around 2026/01",
   "charts": [
-    {
-      "layers": [
-        {
-          "url": "https://freenauticalchart.net/style.json",
-          "useproxy": true,
-          "name": "main",
-          "minzoom": 6,
-          "maxzoom": 18,
-          "profile": "maplibreVector"
-        }
-      ],
-      "name": "freenautical",
-      "icon": "compass.svg"
-    },
     {
       "layers": [
         {

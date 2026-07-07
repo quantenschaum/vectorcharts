@@ -1,6 +1,11 @@
 //test plugin
 
 export default async (api)=>{
+    
+   const STOREKEYTOGGLE=api.getStoreBaseKey()+".toggle";
+   const STOREKEYMAP=api.getStoreBaseKey()+".map";
+
+
    const name=api.getPluginName(); 
 
    console.log(`${name} plugin loaded`);
@@ -128,15 +133,13 @@ const buildHtmlInfo=(allFeatures)=>{
     //parameters that the user can modify
     //we parse them from the "state" field of the style
     let parameters=[];
+    let closefunction;
     if (api.getAvNavVersion() >= 20260115){
-        const keybase=api.getStoreBaseKey();
-        const KEY=".map";
-        const mapkey=keybase+KEY;
         //save the map to the internal store to make it accessible
         //by widgets and to trigger widget re-render
         storeMap=(map)=>{
             console.log(`${name} set map`);
-            api.setStoreData(mapkey,map);
+            api.setStoreData(STOREKEYMAP,map);
             //read the settings we save to loacl storage
             const current=readCurrentFromStorage();
             //remove all that are not in the style any more
@@ -150,13 +153,13 @@ const buildHtmlInfo=(allFeatures)=>{
         //!!important to call to avoid the map remaining active when not being used
         unsetMap=()=>{
             console.log(`${name} unset map`);
-            api.setStoreData(mapkey,undefined);
+            api.setStoreData(STOREKEYMAP,undefined);
             //reset the parameters
             parameters=[];
         }
         //set a global state at the map if it is available
         const setMapStateValue=(name,value)=>{
-            const map=api.getStoreData(mapkey);
+            const map=api.getStoreData(STOREKEYMAP);
             if (! map) return;
             map.setGlobalStateProperty(name,value);
         }
@@ -168,7 +171,7 @@ const buildHtmlInfo=(allFeatures)=>{
         }
         //get a current global state value
         const getMapStateValue=(name,defaultv)=>{
-            const map=api.getStoreData(mapkey);
+            const map=api.getStoreData(STOREKEYMAP);
             if (! map) return defaultv;
             return (map.getGlobalState()||{})[name]||defaultv;
         }
@@ -184,7 +187,11 @@ const buildHtmlInfo=(allFeatures)=>{
         }
         //show a parameter dialog to allow the user to change values
         //will be called by click on the settings widget
-        const showDialog=(ev)=>{
+        const showDialog=async (ev)=>{
+            if (closefunction){
+                closefunction();
+                closefunction=undefined;
+            }
             //collect the current values from the map
             const currentValues={};
             for (let p of parameters){
@@ -220,7 +227,7 @@ const buildHtmlInfo=(allFeatures)=>{
                 //we must set close to false to keep the dialog open    
                 if (Object.keys(defaults).length > 0){
                     buttons.splice(0,0,{
-                        name:'reset',
+                        name:'DBReset',
                         onClick:(ev)=>{
                             return defaults;
                         },
@@ -232,32 +239,31 @@ const buildHtmlInfo=(allFeatures)=>{
                 title:"Map Settings",
                 parameters: parameters,
                 values:currentValues,
-                buttons:buttons
+                buttons:buttons,
+                onClose:()=>{
+                    api.setStoreData(STOREKEYTOGGLE,false);
+                    closefunction=undefined;
+                }
             }
-            api.showDialog(dialogParam,ev);
+            closefunction=await api.showDialog(dialogParam,ev);
         }
-        //a widget that can be added to the nav page to allow to show the map settings
-        const ControlWidget={
-            name: 'FNMapControlWidget',
-            initFunction: (context,props)=>{
-                context.eventHandler.wclick=(ev)=>showDialog(ev);
+        api.registerUserButton({
+            name:'ui',
+            shortText:'Map cfg',
+            longText: 'Configure Map',
+            icon:'compass.svg',
+            storeKeys:{
+                toggle: STOREKEYTOGGLE,
+                visible: STOREKEYMAP,
             },
-            renderHtml:(props,ctx)=> {
-                if (! props.map) return;
-                return `<div class="fnwidget" onclick="wclick"></div>`
+            updateFunction:(state)=>{
+                return {
+                    toggle: state.toggle,
+                    visible: !!state.visible
+                }
             },
-            caption: 'Settings',
-            storeKeys: {
-                map:mapkey
-            }
-
-        }
-        const ControlWidgetParam={
-            formatter:false,
-            formatterParameters: false,
-            unit: false,
-        }
-        api.registerWidget(ControlWidget,ControlWidgetParam);
+            onClick:async (ev)=> await showDialog(ev)
+        },'navpage')
     }
     //register a map layer with the name plugin_freenautical
     //options are the parameters of the layer definition
