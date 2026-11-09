@@ -1,0 +1,73 @@
+{
+  "version": "20261108",
+  "description": "plugin for vector charts",
+  "charts": [
+    {
+      "name": "🇩🇪 FNC-DE (online)",
+      "icon": "compass.svg",
+      "layers": [
+        {
+          "name": "bsh",
+          "url": "https://freenauticalchart.net/vector/fnc-de.json",
+          "useproxy": false,
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "maplibre"
+        }
+      ]
+    },
+    {
+      "name": "🇳🇱 FNC-NL (online)",
+      "icon": "compass.svg",
+      "layers": [
+        {
+          "name": "bsh",
+          "url": "https://freenauticalchart.net/vector/fnc-nl.json",
+          "useproxy": false,
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "maplibre"
+        }
+      ]
+    },
+    {
+      "name": "🇩🇪 FNC-DE",
+      "icon": "compass.svg",
+      "layers": [
+        {
+          "name": "main",
+          "url": "charts/fnc-de.json",
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "plugin_vector"
+        }
+      ]
+    },
+    {
+      "name": "🇳🇱 FNC-NL",
+      "icon": "compass.svg",
+      "layers": [
+        {
+          "name": "main",
+          "url": "charts/fnc-nl.json",
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "plugin_vector"
+        }
+      ]
+    },
+    {
+      "name": "🇺🇸 FNC-US",
+      "icon": "compass.svg",
+      "layers": [
+        {
+          "name": "main",
+          "url": "charts/noaa.json",
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "plugin_vector"
+        }
+      ]
+    }
+  ]
+}
