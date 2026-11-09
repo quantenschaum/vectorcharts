@@ -31,6 +31,33 @@
       ]
     },
     {
+      "name": "🇺🇸 FNC-US (online)",
+      "icon": "compass.svg",
+      "layers": [
+        {
+          "name": "main",
+          "url": "https://freenauticalchart.net/vector/noaa.json",
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "maplibre"
+        }
+      ]
+    },
+    {
+      "name": "🇳🇴 DNL (online)",
+      "icon": "icons/kartverket.ico",
+      "layers": [
+        {
+          "name": "main",
+          "url": "https://dnl.kartverket.no/api/styles/nautisk-bakgrunnskart.json",
+          "useproxy": true,
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "maplibre"
+        }
+      ]
+    },
+    {
       "name": "🇩🇪 FNC-DE",
       "icon": "compass.svg",
       "layers": [
