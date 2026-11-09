@@ -56,8 +56,8 @@
     },
     "s57": {
       "type": "vector",
-      "url": "pmtiles://https://freenauticalchart.net/vector/noaa.pmtiles",
-      "attribution": "fnc-de 2026-11-01"
+      "url": "pmtiles://noaa.pmtiles",
+      "attribution": "FNC/NOAA"
     }
   },
   "sprite": "icons",

@@ -52,7 +52,7 @@
     "s57": {
       "type": "vector",
       "url": "pmtiles://fnc-de.pmtiles",
-      "attribution": "fnc-de 2026-11-01"
+      "attribution": "FNC/BSH"
     }
   },
   "sprite": "icons",

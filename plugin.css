@@ -1,19 +1,15 @@
-/*
-some test css
- */
-.freenauticalFeatureList .featureInfoHtml{
-    margin: 0.5em;
-    border-bottom: 1px solid;
-    border-color: grey;
-    white-space: unset;
+.freenauticalFeatureList .featureInfoHtml {
+  margin: 0.5em;
+  border-bottom: 1px solid;
+  border-color: grey;
+  white-space: unset;
 }
 
-
 .fnwidget {
-    background-image: url("compass.svg");
-    height: 1.5em;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin: 0.2em;
+  background-image: url("compass.svg");
+  height: 1.5em;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0.2em;
 }

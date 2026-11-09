@@ -1,32 +1,25 @@
-AvNav freenauticalcharts
-========================
-[AvNav](https://github.com/wellenvogel/avnav) plugin to access online vector charts from [freenauticalcharts.net](https://freenauticalchart.net).<br>
-Starting from 20260113 it also contains the chart data for offline use (DE).
+# Vector Charts Plugin for AvNav
 
-The plugin requires at least AvNav version 20260104 (for offline charts at least AvNav 20260113) as it utilzes a lot of new plugin interfaces and this way is also usable for AvNav on Android (get a current AvNav beta [here](https://www.wellenvogel.net/software/avnav/downloads/daily/?dir=/software/avnav/downloads/daily&lang=en)).
+[AvNav](https://github.com/wellenvogel/avnav) plugin to access online and offline vector charts based in [maplibre](https://maplibre.org/) styles and [pmtiles](https://maplibre.org/). 
 
-Just upload a zip form the [releases](../../releases) to AvNav on the Download Page in the plugin tab.
+The plugin requires at least AvNav version 20261102 as it uses the new plugin interfaces. It is also usable for AvNav on Android.
 
-Afterwards you should be able to select freenautical and freenautical-local as a charts.
+## Installation
 
-Technical hints
----------------
-The plugin registers the chart in [plugin.json](freenauticalcharts/plugin.json). It uses the _maplibreVector_ layer profile and enables using a proxy to avoid CORS problems.
+Download the ZIP from the releases and upload it into AvNav.
 
-In [plugin.mjs](freenauticalcharts/plugin.mjs) a _featureListFormatter_ is registered that will be called when the user clicks on the map and there are rendered features at this position. The formatter will return the information to be shown (see the [api doc](https://github.com/wellenvogel/avnav/blob/b25fce5eb606142af31e74c0b1b1051625bb8ce1/viewer/util/api.js#L220)).
+## Charts
 
-Build
------
-To build you just need to create a zip
-```
-zip -r frenauticalcharts.zip freenauticalcharts
-```
-To maintain some version handling there are scripts for [setting the version](setVersion.sh) and [building](build.sh). You can run them
-```
-./setVersion.sh && ./build.sh
-```
-This will update [plugin.json](freenauticalcharts/plugin.json) and create a zip with the version in the name.
+You can use the online charts out of the box. For the offline charts, the data files have to be downloaded. To do this, just call `make` in the plugin directory.
 
-Licenses
---------
-The code in this directory is licensed by the [MIT License](LICENSE), the fonts by  [SIL Open Font License, Version 1.1](https://openfontlicense.org/open-font-license-official-text/).<br> For the chart data, styles and sprites refer to [freenauticalchart.net](https://freenauticalchart.net/download/).
+If you want US charts, too, call `make us`.
+
+## Technical Details
+
+The plugin registers the charts listed in `plugin.json` (see [docs](https://www.wellenvogel.net/software/avnav/newDoc/latest/en/special/charts.html#insertingdefs)). It uses the `maplibre` layer profile and may use a proxy to access tiles with closed CORS policies.
+
+In `plugin.mjs` a `featureListFormatter` is registered that will be called when the user clicks on the map and there are rendered features at this position. The formatter will return the information to be shown.
+
+## Building
+
+To build you just need to create a zip with `make build`. Any downloaded data files will be included.
