@@ -4,6 +4,14 @@
 
 The plugin requires at least AvNav version 20261102 as it uses the new plugin interfaces. It is also usable for AvNav on Android.
 
+Rendering the charts in the browser with maplibre delivers a crisp display at any zoom level and upright labels and symbols, even in head-up mode. 
+
+![screenshot](screenshot.png)
+
+Chart features like lights can be disabled and quality information may be shown if present.
+
+![quality](quality.png)
+
 ## Installation
 
 Download the ZIP from the releases and upload it into AvNav.
