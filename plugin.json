@@ -68,6 +68,20 @@
           "profile": "plugin_vector"
         }
       ]
+    },
+    {
+      "name": "🇳🇴 DNL",
+      "icon": "icons/kartverket.ico",
+      "layers": [
+        {
+          "name": "main",
+          "url": "https://dnl.kartverket.no/api/styles/nautisk-bakgrunnskart.json",
+          "useproxy": true,
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "maplibre"
+        }
+      ]
     }
   ]
 }
