@@ -82,6 +82,19 @@
           "profile": "plugin_vector"
         }
       ]
+    },
+    {
+      "name": "🇺🇸 FNC-US",
+      "icon": "compass.svg",
+      "layers": [
+        {
+          "name": "main",
+          "url": "charts/noaa.json",
+          "minzoom": 6,
+          "maxzoom": 18,
+          "profile": "plugin_vector"
+        }
+      ]
     }
   ]
 }
