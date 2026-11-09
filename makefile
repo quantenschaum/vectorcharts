@@ -1,5 +1,4 @@
 SHELL=/bin/bash
-NAME=vectorcharts
 
 update:
 	make -B de nl
@@ -18,10 +17,14 @@ de: charts/fnc-de.pmtiles
 nl: charts/fnc-nl.pmtiles
 us: charts/noaa.pmtiles
 
-build: plugin.json
-	rm -rf $(NAME)
-	mkdir $(NAME)
-	zip -r $(NAME)-$(shell jq -r .version $<).zip $(NAME)
+vectorcharts:
+	rm -rf $@
+	mkdir $@
+	cp -r ./* $@ || true
+
+build: plugin.json vectorcharts
+	zip -r vectorcharts-$(shell jq -r .version $<).zip vectorcharts
+	rm -rf vectorcharts
 
 new-version: plugin.json
 	jq ".version=\"$(shell date +%Y%m%d)\"" $< > $<-
